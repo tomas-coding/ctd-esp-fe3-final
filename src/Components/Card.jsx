@@ -1,32 +1,33 @@
-import React from "react";
-import { Card as CardMui,CardContent,Typography,Button, CardActions, CardActionArea, Grid, Container } from "@mui/material";
+import { useEffect } from "react";
+import { Card as CardMui, CardContent, Typography, Button, CardActions, CardActionArea } from "@mui/material";
+import { useGlobalStates } from '../Context';
 
+const Card = ({ dentist }) => {
+  const { state, dispatch } = useGlobalStates();
+  const { id, name, username } = dentist;
 
-const Card = (props) => {
-  const {id, name, username} = props.user;
-  console.log(id);
-  const addFav = ()=>{
-    // Aqui iria la logica para agregar la Card en el localStorage
-  }
+  const addFav = () => {
+    if (state.favs.some(fav => fav.id === id)) {
+      dispatch({ type: 'DELETE_FAV', payload: dentist });
+    } else {
+      dispatch({ type: 'ADD_FAV', payload: dentist });
+    }
+  };
 
   return (
-    
-        <CardMui>
-          {/* En cada card deberan mostrar en name - username y el id */}
-          {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
-          {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-          <CardActionArea>
-            <CardContent>
-              <Typography align="center" variant="h5">{name}</Typography>
-              <Typography align="center" variant="h6">{username}</Typography>          
-            </CardContent>
-          </CardActionArea>
-            <CardActions>
-              <Button variant="contained" onClick={addFav} className="favButton">Add fav</Button>
-            </CardActions>          
-        </CardMui>
-     
-    
+    <CardMui>
+      <CardActionArea>
+        <CardContent>
+          <Typography align="center" variant="h5">{name}</Typography>
+          <Typography align="center" variant="h6">{username}</Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions >
+        <Button variant="contained" onClick={addFav}>
+          {state.favs.some(fav => fav.id === id) ? 'Remove from Favorites' : 'Add to Favorites'}
+        </Button>
+      </CardActions>
+    </CardMui>
   );
 };
 

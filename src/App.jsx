@@ -5,21 +5,31 @@ import Home from "./Routes/Home"
 import Contact from "./Routes/Contact"
 import Favs from "./Routes/Favs"
 import Detail from "./Routes/Detail"
+import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import { useGlobalStates } from './Context';
+import { useEffect, useState } from "react";
 
 function App() {
+  const { state, dispatch } = useGlobalStates();
+  const [theme, setTheme] = useState(createTheme(state.theme));
+
+  useEffect(() => {
+    setTheme(createTheme(state.theme));
+  }, [state.theme]);
+
   return (
-    
-      <div className="App">
-          <Navbar/>
-          <Routes>
+    <ThemeProvider theme={theme}>
+        <CssBaseline/>      
+        <Navbar/>
+        <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/contacto" element={<Contact/>}/>
           <Route path='/favs' element={<Favs/>}/>
           <Route path='/dentista:id' element={<Detail/>}/>
-          </Routes>
-          <Footer/>
-      </div>
+        </Routes>
+        <Footer/>
       
+    </ThemeProvider>
   );
 }
 
