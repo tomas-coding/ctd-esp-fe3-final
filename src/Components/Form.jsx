@@ -55,8 +55,8 @@ const Form = () => {
   };
 
   return (
-    <>
-      <Box sx={{ marginTop: 15, height: "80px", marginBottom: 15, width: "50%" }} component="form" onSubmit={handleSubmit} className='form-content'>
+    
+      <Box sx={{  height: "330px", marginBottom: 10, width: "50%" }} component="form" onSubmit={handleSubmit} className='form-content'>
       <Collapse in={open}>
           <Alert
           severity='success'
@@ -98,7 +98,7 @@ const Form = () => {
         </Box>
         
       </Box>
-    </>
+    
   );
 };
 

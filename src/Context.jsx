@@ -13,7 +13,7 @@ const initialState = {
             main: '#6572c3',
         },
         secondary: {
-          main: '#f50057',
+          main: '#ffffff',
         },
         gradient:
           'linear-gradient(to left, var(--mui-palette-primary-main), var(--mui-palette-primary-dark))',
