@@ -6,28 +6,53 @@ const themeObject = {
               main: '#3f54b5',
               light: '#6572c3',
               dark: '#2c347e',
+              contrastText: '#ffffff',
             },
             secondary: {
-              main: '#f50057',
+              main: '#ffffff',
             },
             text: {
-              primary: 'rgba(255,255,255,0.99)',
+              primary: 'rgba(255, 255, 255, 0.99)',
             },
             background: {
-              default: 'rgba(48,48,48,0.98)',
-              paper: 'rgba(66,66,66,0.98)',
+              default: 'rgba(48, 48, 48, 0.98)',
+              paper: 'rgba(66, 66, 66, 0.98)',
             },
           },
+          components: {
+            MuiInputLabel: {
+              styleOverrides: {
+                root: {
+                  color: '#ffffff', // Color blanco para las etiquetas de los inputs
+                },
+              },
+            },
+            MuiInput: {
+              styleOverrides: {
+                root: {
+                  color: '#ffffff', // Color blanco para el texto de los inputs
+                  borderColor: '#ffffff', // Color blanco para los bordes de los inputs
+                },
+              },
+            },
+          },
+          
         }
       ,
     light:{palette: {
         type: 'light',
         primary: {
-          main: '#3f51b5',
+            main: '#6572c3',
         },
         secondary: {
           main: '#f50057',
         },
+        gradient:
+          'linear-gradient(to left, var(--mui-palette-primary-main), var(--mui-palette-primary-dark))',
+        border: {
+          subtle: 'var(--mui-palette-neutral-200)',
+        },
+
       },}
 }
 export const reducer = (state, action) => {

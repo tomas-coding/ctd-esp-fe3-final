@@ -1,50 +1,104 @@
-import { Button, Container, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Box, TextField, Button, Alert, Collapse } from '@mui/material';
 
 const Form = () => {
-  //Aqui deberan implementar el form completo con sus validaciones
-  const [showError, setShowError] = useState(false)
-  const [errorMessage, setErrorMessage] = useState("")
-  const [user, setUser] = useState({
-    nombre:"",
-    apellido:"",
-    peliculaFavorita:""
-})
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (user.nombre.length < 3) {
-        setErrorMessage("El nombre debe tener al menos 3 caracteres")
-        setShowError(true)
+  const [open, setOpen] = useState(false)
+  const [showError, setShowError] = useState({
+    nombre: {
+      error: false,
+      message: ''
+    },
+    apellido: {
+      error: false,
+      message: ''
+    },
+    email: {
+      error: false,
+      message: ''
     }
-    else if (/^\s/.test(user.nombre)) {
-      setErrorMessage("El nombre no debe tener espacios vacios")
-      setShowError(true)
-  }
-    else if (user.apellido.length < 7) {
-        setErrorMessage("El apellido debe tener al menos 6 caracteres")
-        setShowError(true)
-    }
-    else{
-    setShowError(false)
-    setShow(true)
-}
-}
-  return (
-    <Container>
-        <Typography variant='h4'>Formulario</Typography >
-        <form onSubmit={handleSubmit} className='form-content' >
-            
-            <TextField label="Nombre"  onChange={(e)=> setUser({...user, nombre:e.target.value})} type="text" />
-            
-            <TextField label="Apellido"  onChange={(e)=> setUser({...user, apellido:e.target.value})} type="text" />
-            
-            <TextField label="Email"  onChange={(e)=> setUser({...user, peliculaFavorita:e.target.value})} type="text" />
-            <Button variant='contained' type='submit'>enviar</Button>
+  });
 
-        </form>
-        {showError && <h2 className='error-message'>{errorMessage}</h2>}
+  const [user, setUser] = useState({
+    nombre: "",
+    apellido: "",
+    email: ""
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  
+    const newErrors = { ...showError };
+  
+    if (user.nombre.length < 3) {
+      newErrors.nombre = { error: true, message: "Nombre incorrecto." };
+    } else {
+      newErrors.nombre = { error: false, message: "" };
+    }
+  
+    if (user.apellido.length > 10) {
+      newErrors.apellido = { error: true, message: "Apellido incorrecto" };
+    } else {
+      newErrors.apellido = { error: false, message: "" };
+    }
+  
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email)) {
+      newErrors.email = { error: true, message: "Email incorrecto" };
+    } else {
+      newErrors.email = { error: false, message: "" };
+    }
+    console.log(user.apellido.length < 1);
+    console.log(newErrors.apellido.error);
+    setShowError(newErrors);
+    if (newErrors.apellido.error == false && newErrors.nombre.error == false && newErrors.email.error == false ) {
+      setOpen(true)
+    }
+  };
+
+  return (
+    <>
+      <Box sx={{ marginTop: 15, height: "80px", marginBottom: 15, width: "50%" }} component="form" onSubmit={handleSubmit} className='form-content'>
+      <Collapse in={open}>
+          <Alert
+          severity='success'
+          onClose={() =>{setOpen(false)}}>
+            Information received. We will contact you shortly to provide you with more information.
+          </Alert>
+        </Collapse>
+        <TextField
+          sx={{ marginBottom: 2, marginTop: 20 }}
+          helperText={showError.nombre.message}
+          error={showError.nombre.error}
+          required
+          label="Nombre"
+          onChange={(e) => setUser({ ...user, nombre: e.target.value })}
+          type="text"
+        />
+        <TextField
+          sx={{ marginBottom: 2 }}
+          helperText={showError.apellido.message}
+          error={showError.apellido.error}
+          required
+          label="Apellido"
+          onChange={(e) => setUser({ ...user, apellido: e.target.value })}
+          type="text"
+        />
+        <TextField
+          sx={{ marginBottom: 2 }}
+          helperText={showError.email.message}
+          required
+          variant='outlined'
+          error={showError.email.error}
+          id="email"
+          label="Email"
+          type="email"
+          onChange={(e) => setUser({ ...user, email: e.target.value })}
+        />
+        <Box sx={{ marginBottom: 5, display: "flex", justifyContent: "center" }}>
+          <Button sx={{ marginBottom: 5, height: "60px", maxWidth: "400px", width: "80%" }} variant='contained' type='submit'>Enviar</Button>
+        </Box>
         
-    </Container>
+      </Box>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { AppBar, Toolbar, IconButton, Typography,Button, Stack, Switch,FormControlLabel } from '@mui/material'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useGlobalStates } from '../Context';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
@@ -26,8 +26,8 @@ const Navbar = () => {
           <Button onClick={() => navigate('/favs')} color='inherit'>Favourites</Button>
           <Button onClick={() => navigate('/contacto')} color='inherit'>Contact</Button>
           {state.theme.palette.type === "light"?
-          <Button endIcon={<LightModeIcon />} color='inherit' onClick={changeTheme}>Light</Button>:
-          <Button endIcon={<DarkModeIcon />} color='inherit' onClick={changeTheme}>Dark</Button>
+          <Button endIcon={<DarkModeIcon />} color='inherit' onClick={changeTheme}>Dark</Button>:
+          <Button endIcon={<LightModeIcon />} color='inherit' onClick={changeTheme}>Light</Button>
         }          
         </Stack>
       </Toolbar>

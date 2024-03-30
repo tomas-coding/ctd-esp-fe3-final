@@ -7,14 +7,21 @@ const GlobalStates = createContext()
 const initialState = {
     favs: JSON.parse(localStorage.getItem('favs')) || [],
     dentists: [],
-    theme: JSON.parse(localStorage.getItem('theme')) || {palette: {type: 'dark',
+    theme: JSON.parse(localStorage.getItem('theme')) || {palette: {
+        type: 'light',
         primary: {
-          main: '#3f51b5',
+            main: '#6572c3',
         },
         secondary: {
           main: '#f50057',
         },
-      }}
+        gradient:
+          'linear-gradient(to left, var(--mui-palette-primary-main), var(--mui-palette-primary-dark))',
+        border: {
+          subtle: 'var(--mui-palette-neutral-200)',
+        },
+
+      },}
     // theme: true o false
 }
 
