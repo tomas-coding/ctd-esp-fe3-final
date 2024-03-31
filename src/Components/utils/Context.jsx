@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useReducer, useState } from "react";
-import { reducer } from "./reducer/reducer";
+import { reducer } from "../../reducer/reducer";
 
 const GlobalStates = createContext()
 

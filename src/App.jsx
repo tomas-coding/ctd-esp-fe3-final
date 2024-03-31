@@ -6,7 +6,7 @@ import Contact from "./Routes/Contact"
 import Favs from "./Routes/Favs"
 import Detail from "./Routes/Detail"
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
-import { useGlobalStates } from './Context';
+import { useGlobalStates } from './Components/utils/Context';
 import { useEffect, useState } from "react";
 
 function App() {

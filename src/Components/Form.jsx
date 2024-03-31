@@ -69,7 +69,7 @@ const Form = () => {
           helperText={showError.nombre.message}
           error={showError.nombre.error}
           required
-          label="Nombre"
+          label="Name"
           onChange={(e) => setUser({ ...user, nombre: e.target.value })}
           type="text"
         />
@@ -78,7 +78,7 @@ const Form = () => {
           helperText={showError.apellido.message}
           error={showError.apellido.error}
           required
-          label="Apellido"
+          label="Last Name"
           onChange={(e) => setUser({ ...user, apellido: e.target.value })}
           type="text"
         />

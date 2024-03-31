@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Card as CardMui, CardContent, Typography, Button, CardActions, CardActionArea,CardMedia } from "@mui/material";
-import { useGlobalStates } from '../Context';
+import { useGlobalStates } from './utils/Context';
 import { useNavigate } from 'react-router-dom'
 const Card = ({ dentist }) => {
   const { state, dispatch } = useGlobalStates();

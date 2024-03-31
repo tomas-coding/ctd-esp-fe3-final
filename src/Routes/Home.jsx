@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card from '../Components/Card'
 import { Container, Grid } from '@mui/material';
-import { useGlobalStates } from '../Context';
+import { useGlobalStates } from '../Components/utils/Context';
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 

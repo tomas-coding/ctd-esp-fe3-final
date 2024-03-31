@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { AppBar, Toolbar, IconButton, Typography,Button, Stack, Drawer } from '@mui/material'
+import { AppBar, Toolbar, IconButton, Typography,Button, Stack, Drawer, Box } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { useGlobalStates } from '../Context';
+import { useGlobalStates } from './utils/Context';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import MenuIcon from '@mui/icons-material/Menu';
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
+import MobileBar from './MobileBar.jsx';
+
+
 
 const Navbar = () => {
   const [open, setOpen] = useState(false)
@@ -19,28 +21,30 @@ const Navbar = () => {
   }
   return (
     <AppBar position='static'>
-      <Toolbar>
-      
-         {/* <IconButton
+      <Toolbar>      
+         <IconButton
          color='secondary'
-         onClick={() => setOpen(true)}>
+         onClick={() => setOpen(true)}
+         sx={{display:{xs:"block", sm:"none"}}}>
             <MenuIcon/>
-         </IconButton>
-            
+         </IconButton>           
          
         <Drawer
         open={open}
         anchor='left'
-        onClose={() => setOpen(false)}>
-          <h4>Holaaa</h4>
-        </Drawer> */}
+        onClose={() => setOpen(false)}>          
+          <MobileBar/>
+        </Drawer>
+
         <Typography variant='h6' component='div' sx={{flexGrow:1}}>
           NavBar
         </Typography>
         <Stack direction='row' spacing={2}>
-          <Button onClick={() => navigate('/')} color='inherit'>Home</Button>
-          <Button onClick={() => navigate('/favs')} color='inherit'>Favourites</Button>
-          <Button onClick={() => navigate('/contacto')} color='inherit'>Contact</Button>
+          <Box sx={{display: {xs:"none", sm:"block"}}}>
+            <Button onClick={() => navigate('/')} color='inherit'>Home</Button>
+            <Button onClick={() => navigate('/favs')} color='inherit'>Favourites</Button>
+            <Button onClick={() => navigate('/contacto')} color='inherit'>Contact</Button>
+          </Box>
           {state.theme.palette.type === "light"?
           <Button endIcon={<DarkModeIcon />} color='inherit' onClick={changeTheme}>Dark</Button>:
           <Button endIcon={<LightModeIcon />} color='inherit' onClick={changeTheme}>Light</Button>
