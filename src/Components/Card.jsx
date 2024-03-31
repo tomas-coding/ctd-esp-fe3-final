@@ -15,7 +15,12 @@ const Card = ({ dentist }) => {
   };
 
   return (
-    <CardMui>
+    <CardMui
+    sx={{
+      transition:"0.2s", "&:hover":{
+        transform:"scale(1.05)",
+      }
+    }}>
       <CardActionArea onClick={() => navigate('/detail/' + id)}>
       <CardMedia
         sx={{ height: "50vh" }}
